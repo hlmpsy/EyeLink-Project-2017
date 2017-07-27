@@ -53,12 +53,12 @@ function saccades_with_blink = get_saccades_with_blink( saccades, blinks)
         %check if the blink is at the begin of the trial and outside
         %every saccade
         if temp_sblinks_locations_indices(ii) == 1
-            disp('1st position');
+            %disp('1st position');
             continue;
         %check if the blink is at the end of the trial and outside
         %every saccade    
         elseif temp_sblinks_locations_indices(ii) == length(temp_ssaccades_locations)
-            disp('last position');
+            %disp('last position');
             continue;
         end
         %if the blink is not at the beginning nor at the end, check if it

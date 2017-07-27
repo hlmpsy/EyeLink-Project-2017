@@ -3,6 +3,7 @@ function csv_content = my_csv_reader( csv_file_id )
     % column            number
     % ------------------------
     % ChosenNumber      3
+    % ChosenRT          4
     % ChosenX           5
     % ChosenY           6
     % Condition         7
@@ -12,7 +13,7 @@ function csv_content = my_csv_reader( csv_file_id )
     % order             123
     % subject_nr        162
     % ------------------------ 
-    wanted_cols=[3 5 6 7 15 19 20 123 162];
+    wanted_cols=[3 4 5 6 7 15 19 20 123 162];
     format=[];
     for ii=1:210
         if any(ii==wanted_cols)
@@ -27,12 +28,13 @@ function csv_content = my_csv_reader( csv_file_id )
     temp_csv_content = textscan(csv_file_id, format, 'delimiter', ',');
     %--
     csv_content.ChosenNumber = temp_csv_content{1}(2:length(temp_csv_content{1}));
-    csv_content.ChosenX = temp_csv_content{2}(2:length(temp_csv_content{2}));
-    csv_content.ChosenY = temp_csv_content{3}(2:length(temp_csv_content{3}));
-    csv_content.Condition = temp_csv_content{4}(2:length(temp_csv_content{4}));
-    csv_content.RealNumber = temp_csv_content{5}(2:length(temp_csv_content{5}));
-    csv_content.TrialNumPerCond = temp_csv_content{6}(2:length(temp_csv_content{6}));
-    csv_content.TrialNumber = temp_csv_content{7}(2:length(temp_csv_content{7}));
-    csv_content.order = temp_csv_content{8}(2:length(temp_csv_content{8}));
-    csv_content.subject_nr = temp_csv_content{9}(2:length(temp_csv_content{9}));
+    csv_content.ChosenRT = temp_csv_content{2}(2:length(temp_csv_content{2}));
+    csv_content.ChosenX = temp_csv_content{3}(2:length(temp_csv_content{3}));
+    csv_content.ChosenY = temp_csv_content{4}(2:length(temp_csv_content{4}));
+    csv_content.Condition = temp_csv_content{5}(2:length(temp_csv_content{5}));
+    csv_content.RealNumber = temp_csv_content{6}(2:length(temp_csv_content{6}));
+    csv_content.TrialNumPerCond = temp_csv_content{7}(2:length(temp_csv_content{7}));
+    csv_content.TrialNumber = temp_csv_content{8}(2:length(temp_csv_content{8}));
+    csv_content.order = temp_csv_content{9}(2:length(temp_csv_content{9}));
+    csv_content.subject_nr = temp_csv_content{10}(2:length(temp_csv_content{10}));
 end

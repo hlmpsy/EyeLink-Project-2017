@@ -3,7 +3,7 @@ function trials = analyse_data( trials_data )
     [rows,num_trials] = size( trials_data );
     trials = cell(1,num_trials);
     %analyse each trial
-    for ii = 2 : 2%num_trials
+    for ii = 1 : 1%num_trials
         %-
         %TODO maybe move this to another file
         %determine during which saccade there is a blink:
@@ -49,8 +49,24 @@ function trials = analyse_data( trials_data )
             %calculate the average x and y
             %disp(trials_data{ii}.fixations.sfix.locations);
             %content that has to be analysed
-            current.content = trials_data{ii}.content(last_sfix_loc:loc);
-            [current.x, current.y] = get_values( current.content );
+            current.content = trials_data{ii}.content((last_sfix_loc + 1):(last_efix_loc-1));%loc or (last_efix_loc-1)
+            %disp((last_sfix_loc + 1));
+            %disp(last_efix_loc);
+            %disp(current.content);
+            [current.x, current.y] = get_x_and_y( current.content );
+            [num_rows, num_columns] = size(current.x);
+            for ii = 1:num_columns
+                current.x_mean = mean(current.x(1:ii));
+                current.y_mean = mean(current.y(1:ii));
+                if (current.x_mean < 2000) && (current.x_mean > 1000) && (current.y_mean < 200)  && (current.y_mean > 100)
+                    disp(current.x_mean);
+                    disp(current.y_mean);
+                end
+            end
+            %current.x_mean = mean(current.x);
+            %current.y_mean = mean(current.y);
+            %disp(current.x_mean);
+            %disp(current.y_mean);
         end
         %-
         %save trial in the cell array trials

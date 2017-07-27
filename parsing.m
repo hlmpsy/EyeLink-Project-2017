@@ -3,9 +3,9 @@ close all;
 clear all;
 %load ASC file and correspondent CSV file from given directory
 %set directory path
-%data_files_content.path = '/Users/mapc3/Documents/MATLAB/Data_Eye_Tracking_Sessions/data 01-03/Eyes on the Line';
+data_files_content.path = '/Users/mapc3/Documents/MATLAB/Data_Eye_Tracking_Sessions/data 01-03/Eyes on the Line';
 %data_files_content.path = '/Users/mapc3/Documents/MATLAB/Data_Eye_Tracking_Sessions/data 11-03/Eyes on the Line';
-data_files_content.path = '/Users/frenkyo/Documents/MATLAB/Data_Eye_Tracking_Sessions.nosync/data 01-03/Eyes on the Line'; %part_21
+%data_files_content.path = '/Users/frenkyo/Documents/MATLAB/Data_Eye_Tracking_Sessions.nosync/data 01-03/Eyes on the Line'; %part_21
 %check if there are ASC files
 %TODO fire error if there are issues with ASC files
 data_files_content.current_dir_asc_files=dir(fullfile(data_files_content.path,'*.asc'));
