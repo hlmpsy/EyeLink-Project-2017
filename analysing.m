@@ -5,9 +5,9 @@ clear all;
 %in each MAT file (participant) there are all the trials done by that specific
 %participant
 %set directory path
-parsed_data_files_content.path = '/Users/mapc3/Documents/MATLAB/Data_Eye_Tracking_Sessions/data 01-03/Eyes on the Line';
+%parsed_data_files_content.path = '/Users/mapc3/Documents/MATLAB/Data_Eye_Tracking_Sessions/data 01-03/Eyes on the Line';
 %parsed_data_files_content.path = '/Users/mapc3/Documents/MATLAB/Data_Eye_Tracking_Sessions/data 11-03/Eyes on the Line';
-%parsed_data_files_content.path = '/Users/frenkyo/Documents/MATLAB/Data_Eye_Tracking_Sessions.nosync/data 01-03/Eyes on the Line';
+parsed_data_files_content.path = '/Users/frenkyo/Documents/MATLAB/Data_Eye_Tracking_Sessions.nosync/data 01-03/Eyes on the Line';
 %check if there are MAT files
 %TODO fire error if there are issues with MAT files
 parsed_data_files_content.current_dir_mat_files=dir(fullfile(parsed_data_files_content.path,'*_p.mat'));

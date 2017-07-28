@@ -28,6 +28,7 @@ function trials = parse_events( asc_events, csv_content )
         trial.asc_trial_number = get_event_content(trials_data.content{ii}{trial_info_event_location}, 9, 9 );
         %get real number from ASC file
         trial.asc_real_number = get_event_content(trials_data.content{ii}{trial_info_event_location}, 11, 11 );
+        %-
         %find the row corresponding to the trial number in the CSV file
         csv_row = find(strcmp(csv_content.TrialNumber, trial.asc_trial_number));
         %get real number from CSV file
@@ -38,20 +39,32 @@ function trials = parse_events( asc_events, csv_content )
            return;
         end
         %-
-        %other info in the csv file:
-        %get condition
-        %disp(csv_content.Condition{csv_row});
-        %get session
-        %disp(csv_content.order{csv_row});
-        %get subject number
-        %disp(csv_content.subject_nr{csv_row});
-        %-
-        %get response time from the csv file:
-        trial.rtime = csv_content.ChosenRT{csv_row};
-        %disp(trial.rtime);
+        %get useful data from CSV file
+        %get chosen number from CSV file
+        trial.csv_ChosenNumber = csv_content.ChosenNumber{csv_row};
+        %get response time from the csv file
+        trial.csv_rtime = csv_content.ChosenRT{csv_row};
+        %disp(trial.csv_rtime);
+        %get ChosenX from CSV file
+        trial.csv_ChosenX = csv_content.ChosenX{csv_row};
+        %get ChosenY from CSV file
+        trial.csv_ChosenY = csv_content.ChosenY{csv_row};
+        %get PAE from CSV file
+        trial.csv_pae = csv_content.pae{csv_row};
+        %get Condition from CSV file
+        trial.csv_Condition = csv_content.Condition{csv_row};
+        %get TrialNumPerCond from CSV file
+        trial.csv_TrialNumPerCond = csv_content.TrialNumPerCond{csv_row};
+        %get TrialNumber from CSV file
+        trial.csv_TrialNumber = csv_content.TrialNumber{csv_row};
+        %get order from CSV file
+        trial.csv_order = csv_content.order{csv_row};
+        %get subject_nr from CSV file
+        trial.csv_subject_nr = csv_content.subject_nr{csv_row};
         %-
         %get trial stime from the asc file:
-        trial.stime = get_trial_stime( trials_data.content{ii} );
+        %trial.stime = get_trial_stime( trials_data.content{ii} );
+        trial.stime = get_opensesame_stime( trials_data.content{ii} );
         %-
         %get fixations:
         trial.fixations = get_fixations( trials_data.content{ii} );
