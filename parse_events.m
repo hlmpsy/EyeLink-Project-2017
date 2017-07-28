@@ -1,11 +1,12 @@
-function trials = parse_events( asc_events, csv_content )
+function result_matrix = parse_events( asc_events, csv_content )
     %each ASC file corresponds to one session attained by one participant
     %and every session is splitted in trials
     trials_data = get_trials( asc_events );
     fprintf('There are %d trials.\n',trials_data.size);
-    trials = cell(1,trials_data.size);
+    %trials = cell(1,trials_data.size);
+    result_matrix = cell(1);
     %parse each trial
-    for ii = 1 : trials_data.size
+    for ii = 1 : 4%trials_data.size
         %for every trial compare trial number and real number in the ASC  
         %file with 
         %trial number and real number in the CSV file
@@ -76,7 +77,7 @@ function trials = parse_events( asc_events, csv_content )
         trial.blinks = get_blinks( trials_data.content{ii} );
         %-
         %save trial in the cell array trials
-        trials{1,ii} = trial;
+        result_matrix = save_results_in_matrix( result_matrix, ii, trial );
         %-
         %TODO move this to another file
         %plot 
@@ -87,4 +88,5 @@ function trials = parse_events( asc_events, csv_content )
         %hold on;   
         %plot(x,y,'Marker', 'o', 'MarkerSize', 4, 'MarkerFaceColor', 'b', 'MarkerEdgeColor', 'b');
     end
+    disp(result_matrix);
 end

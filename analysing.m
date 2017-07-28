@@ -17,18 +17,18 @@ for ii=1:length(parsed_data_files_content.current_dir_mat_files)
     %get the filename from the ASC file
     [parsed_data_files_content.current_mat_file.pathstr,parsed_data_files_content.current_mat_file.name,parsed_data_files_content.current_mat_file.ext] = fileparts(parsed_data_files_content.current_dir_mat_files(ii).name);
     %load content MAT file
-    %participant_trials_parsed = 
+    %participant_trials_parsed_matrix = 
     load([parsed_data_files_content.path '/'  parsed_data_files_content.current_mat_file.name '.mat']);  
     %remove _p from the file name
     parsed_data_files_content.current_mat_file.relevant_name = strsplit(parsed_data_files_content.current_mat_file.name,'_');
     parsed_data_files_content.current_mat_file.relevant_name = cell2mat(parsed_data_files_content.current_mat_file.relevant_name(1,1));
     %TODO maybe I don't need the code here below
     %get the number of trials
-    %[rows,columns] = size(participant_trials_parsed);
+    %[rows,columns] = size(participant_trials_parsed_matrix);
     %save the analysed data in
-    %participant_trials_analysed = cell(1,columns);
+    %participant_trials_analysed_matrix = cell(1,columns);
     %analyse the data
-    participant_trials_analysed = analyse_data( participant_trials_parsed );
+    participant_trials_analysed_matrix = analyse_data( participant_trials_parsed_matrix );
     %save the analysed data
-    save([parsed_data_files_content.path '/'  parsed_data_files_content.current_mat_file.relevant_name '_a.mat'],'participant_trials_analysed');
+    save([parsed_data_files_content.path '/'  parsed_data_files_content.current_mat_file.relevant_name '_a.mat'],'participant_trials_analysed_matrix');
 end

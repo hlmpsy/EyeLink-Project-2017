@@ -26,9 +26,10 @@ for ii=1:length(data_files_content.current_dir_asc_files)
     %get events from ASC file 
     data_files_content.current_asc_file_events = get_events_from_asc_file( data_files_content.current_asc_file_content );
     %parse events
-    participant_trials_parsed = parse_events( data_files_content.current_asc_file_events, data_files_content.current_csv_file_content );
+    participant_trials_parsed_matrix = parse_events( data_files_content.current_asc_file_events, data_files_content.current_csv_file_content );
+    %disp(participant_trials_parsed_matrix);
     %and save them on a MAT file
-    save([data_files_content.path '/'  data_files_content.current_asc_file.name '_p.mat'], 'participant_trials_parsed');   
+    save([data_files_content.path '/'  data_files_content.current_asc_file.name '_p.mat'], 'participant_trials_parsed_matrix');   
     %close the files
     fclose(data_files_content.current_asc_file_id);
     fclose(data_files_content.current_csv_file_id);
