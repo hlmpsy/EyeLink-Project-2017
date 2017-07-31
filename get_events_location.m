@@ -6,5 +6,4 @@ function events_location = get_events_location( events, event_str )
     % contain event_str expression
     % get locations 
     events_location = find(events_location == 1);
-    
 end

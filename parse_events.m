@@ -88,5 +88,5 @@ function result_matrix = parse_events( asc_events, csv_content )
         %hold on;   
         %plot(x,y,'Marker', 'o', 'MarkerSize', 4, 'MarkerFaceColor', 'b', 'MarkerEdgeColor', 'b');
     end
-    disp(result_matrix);
+%     disp(result_matrix);
 end
