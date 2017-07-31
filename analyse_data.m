@@ -6,6 +6,9 @@ function analaysed_data_matrix = analyse_data( trials_data )
     [num_trials, num_fields] = size( trials_data );
     %add fields calculated here
     trials_data{1,columns.valid} = {'valid'}; 
+    trials_data{1,columns.last_fixation_x} = {'columns.last_fixation_x'};
+    trials_data{1,columns.last_fixation_y} = {'columns.last_fixation_y'};
+    trials_data{1,columns.last_fixation_real_num} = {'columns.last_fixation_real_num'};
     trials_data{1,columns.asc_pae} = {'asc_pae'}; 
     %analyse each trial
     fprintf('There are %d trials.\n',num_trials);
@@ -58,9 +61,15 @@ function analaysed_data_matrix = analyse_data( trials_data )
                     trial.asc_pae = get_pae( nol2px(trial.real_number), x );
                     %add to matrix
                     trials_data{ii+1,columns.asc_pae} = trial.asc_pae;
+                    trials_data{ii+1,columns.last_fixation_x} = x;
+                    trials_data{ii+1,columns.last_fixation_y} = y;
+                    trials_data{ii+1,columns.last_fixation_real_num} = px2nol(x);
                 else
                     %add to matrix
                     trials_data{ii+1,columns.asc_pae} = NA;
+                    trials_data{ii+1,columns.last_fixation_x} = NA;
+                    trials_data{ii+1,columns.last_fixation_y} = NA;
+                    trials_data{ii+1,columns.last_fixation_real_num} = px2nol(NA);
                 end
             else
                 disp(ii);

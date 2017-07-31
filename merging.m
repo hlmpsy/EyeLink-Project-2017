@@ -36,8 +36,18 @@ end
 %save results
 save(['/Users/' parsed_data_files_content.whoiam '/Documents/MATLAB/Data_Eye_Tracking_Sessions/results_matrix.mat'],'all_participants_results_matrix');
 %save the data on an Excel file
-T = cell2table(all_participants_results_matrix);
+all_participants_results_table = cell2table(all_participants_results_matrix);
+%disp(all_participants_results_table);
+%remove fixations, saccades and blinks columns
+columns = results_matrix_columns();
+all_participants_results_table(:,[columns.content columns.fixations columns.saccades columns.blinks]) = [];
 %in the first column there is the content of each edf file, discard it
-T = T(:,2:end);
+% all_participants_results_table = all_participants_results_table(:,2:end);
+%disp(all_participants_results_table);
+%columns' order
+columns_order = [13 14 5 1 11 9 12 10 2 3 6 7 4 8 15 16 17 18 19];
+disp(all_participants_results_table(2:end,14));
+summary(all_participants_results_table);
+all_participants_results_table = all_participants_results_table(:,columns_order);
 filename = ['/Users/' parsed_data_files_content.whoiam '/Documents/MATLAB/Data_Eye_Tracking_Sessions/results_matrix.xlsx'];
-writetable(T,filename,'Sheet',1,'WriteVariableNames',false);
+writetable(all_participants_results_table,filename,'Sheet',1,'WriteVariableNames',false);

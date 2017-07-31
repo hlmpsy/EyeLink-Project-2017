@@ -43,7 +43,12 @@ function columns = results_matrix_columns()
     %they start after the last info variable 
     %columns.blinks + 1 valid
     columns.valid = columns.blinks + 1;
+    %columns.valid + 1 last_fixation_x
+    columns.last_fixation_x = columns.valid + 1;
+    %columns.valid + 1 last_fixation_y
+    columns.last_fixation_y = columns.valid + 2;
+    %columns.valid + 1 last_fixation_real_num
+    columns.last_fixation_real_num = columns.valid + 3;
     %columns.valid + 1 asc_pae
-    columns.asc_pae = columns.valid + 1;    
-    
+    columns.asc_pae = columns.valid + 4;    
 end
