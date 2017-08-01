@@ -33,6 +33,12 @@ for jj=1:1%length(nameFolds)
         data_files_content.current_asc_file_events = get_events_from_asc_file( data_files_content.current_asc_file_content );
         %parse events
         participant_trials_parsed_matrix = parse_events( data_files_content.current_asc_file_events, data_files_content.current_csv_file_content );
+        %add column with filename 
+        [rows,columns] = size(participant_trials_parsed_matrix);
+        filename_column = cell(rows,1);
+        filename_column(:) = data_files_content.current_asc_file.fullname;
+        participant_trials_parsed_matrix = [participant_trials_parsed_matrix, filename_column];
+        disp(participant_trials_parsed_matrix);
         %disp(participant_trials_parsed_matrix);
         %and save them on a MAT file
         save([data_files_content.path '/'  data_files_content.current_asc_file.name '_p.mat'], 'participant_trials_parsed_matrix');   

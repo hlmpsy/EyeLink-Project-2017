@@ -13,6 +13,7 @@ function blinks = get_blinks( content )
     blinks.sblink.eye = cellfun(@(x) get_event_content(x,2,2), blinks.sblink.msgs);
     %disp(blinks.sblink.eye{1});
     blinks.sblink.stime = cellfun(@(x) get_event_content(x,3,3), blinks.sblink.msgs);
+    blinks.sblink.stime = str2double(blinks.sblink.stime);
     %disp(blinks.sblink.stime{1});
     %-
     %get end blinks:
@@ -28,9 +29,12 @@ function blinks = get_blinks( content )
     blinks.eblink.eye = cellfun(@(x) get_event_content(x,2,2), blinks.eblink.msgs);
     %disp(blinks.eblink.eye{1});
     blinks.eblink.stime = cellfun(@(x) get_event_content(x,3,3), blinks.eblink.msgs);
+    blinks.eblink.stime = str2double(blinks.eblink.stime);
     %disp(blinks.eblink.stime{1});
     blinks.eblink.etime = cellfun(@(x) get_event_content(x,4,4), blinks.eblink.msgs);
+    blinks.eblink.etime = str2double(blinks.eblink.etime);
     %disp(blinks.eblink.etime{1});
     blinks.eblink.dur = cellfun(@(x) get_event_content(x,5,5), blinks.eblink.msgs);
+    blinks.eblink.dur = str2double(blinks.eblink.dur);
     %disp(blinks.eblink.dur{1});    
 end

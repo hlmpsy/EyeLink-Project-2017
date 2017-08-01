@@ -47,11 +47,11 @@ function valid_fixations  = get_valid_fixations( fixations, blinks )
             end           
             %-
             %check if the fix before the blink last less than 100ms
-            if (str2double(fixations.efix.etime{temp_eblinks_locations_indices(ii)-1})-str2double(fixations.efix.stime{temp_eblinks_locations_indices(ii)-1}) < 100)
+            if (fixations.efix.etime(temp_eblinks_locations_indices(ii)-1)-fixations.efix.stime(temp_eblinks_locations_indices(ii)-1) < 100)
                 valid_fixations(temp_sblinks_locations_indices(ii)-1) = 0; 
             end
             %check if the fix after the blink last less than 100ms
-            if (str2double(fixations.efix.etime{temp_eblinks_locations_indices(ii)+1})-str2double(fixations.efix.stime{temp_eblinks_locations_indices(ii)+1}) < 100)
+            if (fixations.efix.etime(temp_eblinks_locations_indices(ii)+1)-fixations.efix.stime(temp_eblinks_locations_indices(ii)+1) < 100)
                 valid_fixations(temp_sblinks_locations_indices(ii)) = 0; 
             end
         end

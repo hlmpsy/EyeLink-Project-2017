@@ -28,15 +28,15 @@ function csv_content = my_csv_reader( csv_file_id )
     %disp(format);
     temp_csv_content = textscan(csv_file_id, format, 'delimiter', ',');
     %--
-    csv_content.ChosenNumber = temp_csv_content{1}(2:length(temp_csv_content{1}));
-    csv_content.ChosenRT = temp_csv_content{2}(2:length(temp_csv_content{2}));
-    csv_content.ChosenX = temp_csv_content{3}(2:length(temp_csv_content{3}));
-    csv_content.ChosenY = temp_csv_content{4}(2:length(temp_csv_content{4}));
+    csv_content.ChosenNumber = str2double(temp_csv_content{1}(2:length(temp_csv_content{1})));
+    csv_content.ChosenRT = str2double(temp_csv_content{2}(2:length(temp_csv_content{2})));
+    csv_content.ChosenX = str2double(temp_csv_content{3}(2:length(temp_csv_content{3})));
+    csv_content.ChosenY = str2double(temp_csv_content{4}(2:length(temp_csv_content{4})));
     csv_content.Condition = temp_csv_content{5}(2:length(temp_csv_content{5}));
-    csv_content.pae = temp_csv_content{6}(2:length(temp_csv_content{6}));
-    csv_content.RealNumber = temp_csv_content{7}(2:length(temp_csv_content{7}));
-    csv_content.TrialNumPerCond = temp_csv_content{8}(2:length(temp_csv_content{8}));
-    csv_content.TrialNumber = temp_csv_content{9}(2:length(temp_csv_content{9}));
+    csv_content.pae = str2double(temp_csv_content{6}(2:length(temp_csv_content{6})));
+    csv_content.RealNumber = str2double(temp_csv_content{7}(2:length(temp_csv_content{7})));
+    csv_content.TrialNumPerCond = str2double(temp_csv_content{8}(2:length(temp_csv_content{8})));
+    csv_content.TrialNumber = str2double(temp_csv_content{9}(2:length(temp_csv_content{9})));
     csv_content.order = temp_csv_content{10}(2:length(temp_csv_content{10}));
-    csv_content.subject_nr = temp_csv_content{11}(2:length(temp_csv_content{11}));
+    csv_content.subject_nr = str2double(temp_csv_content{11}(2:length(temp_csv_content{11})));
 end

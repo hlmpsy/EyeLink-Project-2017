@@ -22,13 +22,13 @@ function analaysed_data_matrix = analyse_data( trials_data )
         trials_data{ii+1,columns.valid} = trial.valid;
         %trial.csv_rtime from opensesame (CSV)
         int_rtime = trials_data{ii+1,columns.csv_rtime}; %csv_rtime
-        int_rtime = round(str2double(int_rtime));
+        int_rtime = round(int_rtime);
         %the spacebar is pressed at stime + rtime
         %the stime here comes from opensesame (CSV) as well
-        spacebar_time = num2str(str2double(trials_data{ii+1,columns.stime}) + int_rtime - 2);
+        spacebar_time = trials_data{ii+1,columns.stime} + int_rtime - 2;
 %         disp(spacebar_time);
 %         disp(trials_data{ii+1,columns.csv_subject_nr});
-        loc = get_events_location(trials_data{ii+1,columns.content} , spacebar_time );
+        loc = get_events_location(trials_data{ii+1,columns.content}, num2str(spacebar_time));
         %check if it is inside a fix
         last_sfix_loc = trials_data{ii+1,columns.fixations}.sfix.locations(end);
         last_efix_loc = trials_data{ii+1,columns.fixations}.efix.locations(end);
@@ -51,13 +51,13 @@ function analaysed_data_matrix = analyse_data( trials_data )
                 %-
                 %use eyelink average x and y
                 %first check if x and y are in AOI #3
-                x = str2double(trials_data{ii+1,columns.fixations}.efix.x(end));
-                y = str2double(trials_data{ii+1,columns.fixations}.efix.y(end));
+                x = trials_data{ii+1,columns.fixations}.efix.x(end);
+                y = trials_data{ii+1,columns.fixations}.efix.y(end);
                 %if they aren't in AOI #3 then discard
                 %TODO maybe other conditions needed
                 if get_aoi(x,y, trials_data{ii+1,columns.content}) == 3
                     %calc PAE 
-                    trial.real_number = str2double(trials_data{ii+1,columns.asc_real_number});
+                    trial.real_number = trials_data{ii+1,columns.asc_real_number};
                     trial.asc_pae = get_pae( nol2px(trial.real_number), x );
                     %add to matrix
                     trials_data{ii+1,columns.asc_pae} = trial.asc_pae;

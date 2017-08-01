@@ -8,6 +8,6 @@ function opensesame_stime = get_opensesame_stime( content )
     %MSG	timestamp audio and canvas onset
     %-
     opensesame_stime = get_event_content(content{opensesame_stime_location}, 2, 2 );
-    disp(opensesame_stime);
+    opensesame_stime = str2double(opensesame_stime);
 end
 

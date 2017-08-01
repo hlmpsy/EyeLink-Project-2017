@@ -27,41 +27,46 @@ function result_matrix = parse_events( asc_events, csv_content )
         %-
         %get trial number from ASC file
         trial.asc_trial_number = get_event_content(trials_data.content{ii}{trial_info_event_location}, 9, 9 );
+        trial.asc_trial_number = str2double(trial.asc_trial_number);
         %get real number from ASC file
         trial.asc_real_number = get_event_content(trials_data.content{ii}{trial_info_event_location}, 11, 11 );
+        trial.asc_real_number = str2double(trial.asc_real_number);
         %-
         %find the row corresponding to the trial number in the CSV file
-        csv_row = find(strcmp(csv_content.TrialNumber, trial.asc_trial_number));
+        %csv_row = find(strcmp(csv_content.TrialNumber, trial.asc_trial_number));
+        csv_row = find(csv_content.TrialNumber == trial.asc_trial_number);
         %get real number from CSV file
-        trial.csv_real_number = csv_content.RealNumber{csv_row};
+        trial.csv_real_number = csv_content.RealNumber(csv_row);
         %chek if they coincide
-        if  trial.csv_real_number ~= trial.asc_real_number{1}
+        if  ~(trial.csv_real_number == trial.asc_real_number(1))
+           disp(trial.csv_real_number);
+           disp(trial.asc_real_number{1});
            error('Err. real number not matching in ASC and CSV file');
            return;
         end
         %-
         %get useful data from CSV file
         %get chosen number from CSV file
-        trial.csv_ChosenNumber = csv_content.ChosenNumber{csv_row};
+        trial.csv_ChosenNumber = csv_content.ChosenNumber(csv_row);
         %get response time from the csv file
-        trial.csv_rtime = csv_content.ChosenRT{csv_row};
+        trial.csv_rtime = csv_content.ChosenRT(csv_row);
         %disp(trial.csv_rtime);
         %get ChosenX from CSV file
-        trial.csv_ChosenX = csv_content.ChosenX{csv_row};
+        trial.csv_ChosenX = csv_content.ChosenX(csv_row);
         %get ChosenY from CSV file
-        trial.csv_ChosenY = csv_content.ChosenY{csv_row};
+        trial.csv_ChosenY = csv_content.ChosenY(csv_row);
         %get PAE from CSV file
-        trial.csv_pae = csv_content.pae{csv_row};
+        trial.csv_pae = csv_content.pae(csv_row);
         %get Condition from CSV file
-        trial.csv_Condition = csv_content.Condition{csv_row};
+        trial.csv_Condition = csv_content.Condition(csv_row);
         %get TrialNumPerCond from CSV file
-        trial.csv_TrialNumPerCond = csv_content.TrialNumPerCond{csv_row};
+        trial.csv_TrialNumPerCond = csv_content.TrialNumPerCond(csv_row);
         %get TrialNumber from CSV file
-        trial.csv_TrialNumber = csv_content.TrialNumber{csv_row};
+        trial.csv_TrialNumber = csv_content.TrialNumber(csv_row);
         %get order from CSV file
-        trial.csv_order = csv_content.order{csv_row};
+        trial.csv_order = csv_content.order(csv_row);
         %get subject_nr from CSV file
-        trial.csv_subject_nr = csv_content.subject_nr{csv_row};
+        trial.csv_subject_nr = csv_content.subject_nr(csv_row);
         %-
         %get trial stime from the asc file:
         %trial.stime = get_trial_stime( trials_data.content{ii} );
