@@ -1,13 +1,10 @@
-function valid_fixations  = get_valid_fixations( fixations, blinks )
+function fixations  = get_valid_fixations( fixations, blinks )
     %-
-    %at the beginning suppose all fixations are valid
-    valid_fixations = ones(1,length(fixations.sfix.locations));
     %check if there are or not blinks in the current trial
     if isempty(blinks.sblink.locations)
+        disp('No blinks in this trial');
         return;
     else
-%         disp("there are blinks");
-%         disp(blinks.sblink.locations);
         %determine location of the FIX preceding and following a blink
         %get fixations locations cell array:
         %fixations.sfix.locations;
@@ -19,12 +16,16 @@ function valid_fixations  = get_valid_fixations( fixations, blinks )
         %sort temp_sfix_locations in ascending order
         temp_sfix_locations = sort(temp_sfix_locations);
         %-
-        %copy to a temp cell array the esaccades locations
+        %copy to a temp cell array the efix locations
         temp_efix_locations = fixations.efix.locations;
+        disp('1');
+        disp(temp_efix_locations);
         %pop in the temp cell array the eblink locations
         temp_efix_locations = [temp_efix_locations blinks.eblink.locations];
         %sort temp_sfix_locations in ascending order
         temp_efix_locations = sort(temp_efix_locations);
+        disp('2');
+        disp(temp_efix_locations);
         %-
         %consider temp_sblinks_locations, then get the indices where the sblinks are
         temp_sblinks_locations_indices = [1:length(temp_sfix_locations)];
@@ -32,10 +33,8 @@ function valid_fixations  = get_valid_fixations( fixations, blinks )
         %consider temp_eblinks_locations, then get the indices where the eblinks are
         temp_eblinks_locations_indices = [1:length(temp_efix_locations)];
         temp_eblinks_locations_indices = temp_eblinks_locations_indices( ismember( temp_efix_locations, blinks.eblink.locations ));
+        disp(temp_eblinks_locations_indices);
         %-
-        %initialize two empty vectors
-        fixations_before_blink.sfix = [];
-        fixations_after_blink.efix = [];
         %for every blink do the following
         for ii = 1:length(temp_sblinks_locations_indices)
             %check if the blink is at the begin of the trial
@@ -44,16 +43,47 @@ function valid_fixations  = get_valid_fixations( fixations, blinks )
             %check if the blink is at the end of the trial 
             elseif temp_sblinks_locations_indices(ii) == length(temp_sfix_locations)
                 continue;
-            end           
+            end
             %-
-            %check if the fix before the blink last less than 100ms
-            if (fixations.efix.etime(temp_eblinks_locations_indices(ii)-1)-fixations.efix.stime(temp_eblinks_locations_indices(ii)-1) < 100)
-                valid_fixations(temp_sblinks_locations_indices(ii)-1) = 0; 
+            %get the location of the efix before the eblink in the vector
+            %temp_eblinks_locations_indices
+            disp('temp_efix_locations');
+            disp(temp_efix_locations(temp_sblinks_locations_indices(ii)-1));
+            disp(temp_efix_locations(temp_sblinks_locations_indices(ii)+1));
+            %blink is after this fixation
+            blink_after_loc = find(fixations.efix.locations == (temp_efix_locations(temp_sblinks_locations_indices(ii)-1)));
+            %blink is before this fixation
+            blink_before_loc = find(fixations.efix.locations == (temp_efix_locations(temp_sblinks_locations_indices(ii)+1)));
+            disp('before');
+            disp(blink_before_loc);
+            fixations.efix.before(blink_before_loc) = 1;
+            disp(fixations.efix.before);
+            disp('after');
+            disp(blink_after_loc);
+            fixations.efix.after(blink_after_loc) = 1;
+            disp(fixations.efix.after);
+            disp(fixations.efix.locations);
+            disp('-');
+            %-
+            %if the fixation that has a blink after last less than 100ms
+            %then it is not a valid fixation
+            if (fixations.efix.etime(blink_after_loc)-fixations.efix.stime(blink_after_loc) < 100)
+                fixations.efix.valid(blink_after_loc) = 0; 
             end
-            %check if the fix after the blink last less than 100ms
-            if (fixations.efix.etime(temp_eblinks_locations_indices(ii)+1)-fixations.efix.stime(temp_eblinks_locations_indices(ii)+1) < 100)
-                valid_fixations(temp_sblinks_locations_indices(ii)) = 0; 
+            disp(fixations.efix.etime(blink_after_loc));
+            disp(fixations.efix.stime(blink_after_loc));
+            disp(fixations.efix.etime(blink_after_loc)-fixations.efix.stime(blink_after_loc));
+            disp(fixations.efix.valid);
+            %-
+            %if the fixation that has a blink before last less than 100ms
+            %then it is not a valid fixation
+            if (fixations.efix.etime(blink_before_loc)-fixations.efix.stime(blink_before_loc) < 100)
+                fixations.efix.valid(blink_before_loc) = 0;
             end
+            disp(fixations.efix.etime(blink_before_loc));
+            disp(fixations.efix.stime(blink_before_loc));
+            disp(fixations.efix.etime(blink_before_loc)-fixations.efix.stime(blink_before_loc));
+            disp(fixations.efix.valid);
         end
     end
 end

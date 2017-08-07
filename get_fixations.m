@@ -44,5 +44,8 @@ function fixations = get_fixations( content )
     %disp(fixations.efix.y{1});
     fixations.efix.aps = cellfun(@(x) get_event_content(x,8,8), fixations.efix.msgs);
     fixations.efix.aps = str2double(fixations.efix.aps);
+    fixations.efix.valid = ones(1,length(fixations.efix.eye));
+    fixations.efix.after = zeros(1,length(fixations.efix.eye));
+    fixations.efix.before = zeros(1,length(fixations.efix.eye));
     %disp(fixations.efix.aps{1});
 end

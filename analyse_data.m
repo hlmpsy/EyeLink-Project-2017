@@ -15,11 +15,13 @@ function analaysed_data_matrix = analyse_data( trials_data )
     for ii = 1 : (num_trials - 1) 
         %-
         %get valid fixations
-        valid_fixations = get_valid_fixations(trials_data{ii+1,columns.fixations}, trials_data{ii+1,columns.blinks});
+        disp('subject nr');
+        disp(trials_data{ii+1,14});
+        trials_data{ii+1,columns.fixations} = get_valid_fixations(trials_data{ii+1,columns.fixations}, trials_data{ii+1,columns.blinks});
         %check if a trial is valid
-        trial.valid = check_validity_trial( trials_data(ii+1,:), valid_fixations );
+%        trial.valid = check_validity_trial( trials_data(ii+1,:), valid_fixations );
         %keep track of non valid trials as well
-        trials_data{ii+1,columns.valid} = trial.valid;
+%        trials_data{ii+1,columns.valid} = trial.valid;
         %trial.csv_rtime from opensesame (CSV)
         int_rtime = trials_data{ii+1,columns.csv_rtime}; %csv_rtime
         int_rtime = round(int_rtime);
@@ -41,7 +43,7 @@ function analaysed_data_matrix = analyse_data( trials_data )
         last_esacc_loc = trials_data{ii+1,columns.saccades}.esacc.locations(end);
         is_in_last_sacc = (loc > last_ssacc_loc) && (loc < last_esacc_loc);
         %TODO if it is last saccade then throw an error
-        if (trial.valid)
+        if (true)
             if (is_in_last_fix && ~is_in_last_sacc)
                 %- 
                 %calc my own average x and y
@@ -69,7 +71,7 @@ function analaysed_data_matrix = analyse_data( trials_data )
                     trials_data{ii+1,columns.asc_pae} = NA;
                     trials_data{ii+1,columns.last_fixation_x} = NA;
                     trials_data{ii+1,columns.last_fixation_y} = NA;
-                    trials_data{ii+1,columns.last_fixation_real_num} = px2nol(NA);
+                    trials_data{ii+1,columns.last_fixation_real_num} = NA;
                 end
             else
                 disp(ii);

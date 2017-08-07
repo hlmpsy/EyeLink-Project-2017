@@ -10,7 +10,7 @@ nameFolds(ismember(nameFolds,{'.','..','EDF2ASC','bin','4DOS'})) = [];
 for jj=1:1%length(nameFolds)
     [status, data_files_content.whoiam] = system('whoami');
     data_files_content.whoiam = regexprep(data_files_content.whoiam,'\s+','');
-    data_files_content.path = ['/Users/' data_files_content.whoiam '/Documents/MATLAB/Data_Eye_Tracking_Sessions/' nameFolds{jj} '/Eyes on the Line'];
+    data_files_content.path = ['/Users/' data_files_content.whoiam '/Documents/MATLAB/LastFixationOnTheLine_Task/Data_Eye_Tracking_Sessions/' nameFolds{jj} '/Eyes on the Line'];
     %data_files_content.path = '/Users/mapc3/Documents/MATLAB/Data_Eye_Tracking_Sessions/data 11-03/Eyes on the Line';
     %data_files_content.path = '/Users/frenkyo/Documents/MATLAB/Data_Eye_Tracking_Sessions.nosync/data 01-03/Eyes on the Line'; %part_21
     %check if there are ASC files
@@ -36,7 +36,7 @@ for jj=1:1%length(nameFolds)
         %add column with filename 
         [rows,columns] = size(participant_trials_parsed_matrix);
         filename_column = cell(rows,1);
-        filename_column(:) = data_files_content.current_asc_file.fullname;
+        filename_column(:) = cellstr(data_files_content.current_asc_file.fullname);
         participant_trials_parsed_matrix = [participant_trials_parsed_matrix, filename_column];
         disp(participant_trials_parsed_matrix);
         %disp(participant_trials_parsed_matrix);

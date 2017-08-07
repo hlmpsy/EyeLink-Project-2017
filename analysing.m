@@ -10,13 +10,13 @@ nameFolds(ismember(nameFolds,{'.','..','EDF2ASC','bin','4DOS'})) = [];
 for jj=1:1%length(nameFolds) 
     [status, parsed_data_files_content.whoiam] = system('whoami');
     parsed_data_files_content.whoiam = regexprep(parsed_data_files_content.whoiam,'\s+','');
-    parsed_data_files_content.path = ['/Users/' parsed_data_files_content.whoiam '/Documents/MATLAB/Data_Eye_Tracking_Sessions/' nameFolds{jj} '/Eyes on the Line'];
+    parsed_data_files_content.path = ['/Users/' parsed_data_files_content.whoiam '/Documents/MATLAB/LastFixationOnTheLine_Task/Data_Eye_Tracking_Sessions/' nameFolds{jj} '/Eyes on the Line'];
     %parsed_data_files_content.path = '/Users/mapc3/Documents/MATLAB/Data_Eye_Tracking_Sessions/data 11-03/Eyes on the Line';
     %parsed_data_files_content.path = '/Users/frenkyo/Documents/MATLAB/Data_Eye_Tracking_Sessions.nosync/data 01-03/Eyes on the Line'; %part_21
     %check if there are *_p.mat files
     parsed_data_files_content.current_dir_mat_files=dir(fullfile(parsed_data_files_content.path,'*_p.mat'));
     %for each *_p.mat file
-    for ii=1:length(parsed_data_files_content.current_dir_mat_files)
+    for ii=5:5%length(parsed_data_files_content.current_dir_mat_files)
         parsed_data_files_content.current_mat_file.fullname = parsed_data_files_content.current_dir_mat_files(ii).name;
         %get the filename from the ASC file
         [parsed_data_files_content.current_mat_file.pathstr,parsed_data_files_content.current_mat_file.name,parsed_data_files_content.current_mat_file.ext] = fileparts(parsed_data_files_content.current_dir_mat_files(ii).name);

@@ -9,7 +9,7 @@ all_participants_results_matrix = {};
 for jj=1:1%length(nameFolds) 
     [status, parsed_data_files_content.whoiam] = system('whoami');
     parsed_data_files_content.whoiam = regexprep(parsed_data_files_content.whoiam,'\s+','');
-    parsed_data_files_content.path = ['/Users/' parsed_data_files_content.whoiam '/Documents/MATLAB/Data_Eye_Tracking_Sessions/' nameFolds{jj} '/Eyes on the Line'];
+    parsed_data_files_content.path = ['/Users/' parsed_data_files_content.whoiam '/Documents/MATLAB/LastFixationOnTheLine_Task/Data_Eye_Tracking_Sessions/' nameFolds{jj} '/Eyes on the Line'];
     %parsed_data_files_content.path = '/Users/mapc3/Documents/MATLAB/Data_Eye_Tracking_Sessions/data 11-03/Eyes on the Line';
     %parsed_data_files_content.path = '/Users/frenkyo/Documents/MATLAB/Data_Eye_Tracking_Sessions.nosync/data 01-03/Eyes on the Line'; %part_21
     %check if there are *_a.mat files
@@ -34,7 +34,7 @@ end
 %disp(['/Users/' parsed_data_files_content.whoiam '/Documents/MATLAB/Data_Eye_Tracking_Sessions/results_matrix.mat']);
 %disp(all_participants_results_matrix);
 %save results
-save(['/Users/' parsed_data_files_content.whoiam '/Documents/MATLAB/Data_Eye_Tracking_Sessions/results_matrix.mat'],'all_participants_results_matrix');
+save(['/Users/' parsed_data_files_content.whoiam '/Documents/MATLAB/LastFixationOnTheLine_Task/Data_Eye_Tracking_Sessions/results_matrix.mat'],'all_participants_results_matrix');
 %save the data on an Excel file
 all_participants_results_table = cell2table(all_participants_results_matrix);
 %disp(all_participants_results_table);
@@ -49,5 +49,5 @@ columns_order = [13 14 5 1 11 9 12 10 2 3 6 7 4 8 15 16 17 18 19];
 disp(all_participants_results_table(2:end,14));
 summary(all_participants_results_table);
 all_participants_results_table = all_participants_results_table(:,columns_order);
-filename = ['/Users/' parsed_data_files_content.whoiam '/Documents/MATLAB/Data_Eye_Tracking_Sessions/results_matrix.xlsx'];
+filename = ['/Users/' parsed_data_files_content.whoiam '/Documents/MATLAB/LastFixationOnTheLine_Task/Data_Eye_Tracking_Sessions/results_matrix.xlsx'];
 writetable(all_participants_results_table,filename,'Sheet',1,'WriteVariableNames',false);

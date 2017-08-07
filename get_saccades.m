@@ -54,4 +54,5 @@ function saccades = get_saccades( content )
     saccades.esacc.pv = cellfun(@(x) get_event_content(x,11,11), saccades.esacc.msgs);
     saccades.esacc.pv = str2double(saccades.esacc.pv);
     %disp(saccades.esacc.pv{1});
+    saccades.esacc.angle = -atan2(saccades.esacc.ey - saccades.esacc.sy,saccades.esacc.ex - saccades.esacc.sx)*180/pi;
 end
